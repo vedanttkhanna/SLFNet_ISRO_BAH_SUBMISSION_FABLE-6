@@ -60,6 +60,7 @@ SLFNet achieves +6.95 PSNR and +0.2 SSIM over the previous best after only 10,00
 
 ```
 SLFNet/
+    slfnet.ipynb               Main experiment notebook (DiffCR + UnCRtainTS-NAFNet + fusion)
     bhoonidhi_scraper.py       Automated LISS-IV data collection via Bhoonidhi API
     data/                      Dataset preparation and patch extraction scripts
     models/
@@ -70,6 +71,14 @@ SLFNet/
     evaluation/                Evaluation scripts (PSNR, SSIM, MAE, confidence maps)
     checkpoints/               Model checkpoints
 ```
+
+---
+
+## slfnet.ipynb
+
+The main experiment notebook. Runs the full SLFNet pipeline end to end on Colab: downloads the LISS-IV + Sentinel-1 SAR archive, loads and normalizes the per-city timestamps, runs baseline DiffCR inference, then walks through the fine-tuning progression (projection layer → conditioning-encoder transfer learning → full model fine-tuning) before combining the resulting DiffCR prediction with the UnCRtainTS-NAFNet SAR-guided prediction in the final multimodal fusion step. Markdown cells mark the start of each stage; the PSNR/SSIM table in [Results](#results-so-far) is produced by the last few cells.
+
+**Requirements:** a Colab (or local) GPU runtime, a Kaggle account with API credentials (`~/.kaggle/kaggle.json` or filled into the notebook's auth cell), and a Hugging Face token if the DiffCR checkpoint download is rate-limited.
 
 ---
 
